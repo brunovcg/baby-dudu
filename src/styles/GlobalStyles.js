@@ -2,8 +2,6 @@ import { createGlobalStyle } from "styled-components";
 
 
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;800&family=Work+Sans:ital,wght@0,400;0,800;1,400;1,800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
 :root {
     --light-grey: #F7F5F5;
     --grey: #666666;
@@ -12,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     --green: #6BBAA6;
     --dark-green: #7A9490;
     --purple: #B2A1DA;
-    --blue: #aac3ef;
+    --blue: #79a2fc;
     --white: #fff;
        
     }
@@ -30,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h1 {
-      font-family: 'Noto Sans', sans-serif;
+      font-family: 'Chango', cursive;
       font-weight: 800;
     }
 
@@ -47,6 +45,7 @@ const GlobalStyle = createGlobalStyle`
     }
     button {
         cursor: pointer;
+        font-family: 'Chango', cursive;
     }
     ul{
       padding: 0;

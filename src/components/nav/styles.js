@@ -13,10 +13,22 @@ const Styled = styled.div`
     height: 220px;
   }
 
+  .box-ddl{
+
+  display: flex;
+  width: 70%;
+
+  @media (max-width: ${`${configs.mobileBreakpoint}px`}) {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+  }
+
   nav {
     display: flex;
     justify-content: center;
-    width: 50%;
+    width: 80%;
     height: 100%;
 
     @media (max-width: ${`${configs.mobileBreakpoint}px`}) {
@@ -28,7 +40,7 @@ const Styled = styled.div`
       display: flex;
       justify-content: center;
       width: 100%;
-      gap: 70px;
+      gap: 50px;
       height: 100%;
 
       @media (max-width: ${`${configs.mobileBreakpoint}px`}) {
@@ -38,15 +50,16 @@ const Styled = styled.div`
 
       li {
         font-family: "Sigmar One", cursive;
-        font-size: 30px;
+        font-size: 25px;
         font-weight: bold;
         color: var(--grey);
         height: 100%;
         display: flex;
         align-items: center;
+        cursor: pointer;
 
         @media (max-width: ${`${configs.mobileBreakpoint}px`}) {
-       font-size: 20px;
+       font-size: 18px;
     }
 
         :hover {
@@ -56,17 +69,22 @@ const Styled = styled.div`
       }
     }
   }
+
+}
   .dropdown {
-    width: 20%;
+    width: 10%;
     display: flex;
     justify-content: center;
+    height: 100%;
 
     @media (max-width: ${`${configs.mobileBreakpoint}px`}) {
       align-items: center;
       height: 33%;
+      width: 50%;
 
       button {
-        height: 40px;
+        height: 50px;
+        width: 160px;
       }
     }
   }

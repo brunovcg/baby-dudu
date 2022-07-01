@@ -1,13 +1,14 @@
-import {ProductProvider} from "./products"
+import { ProductProvider } from "./products";
 import { ModalProvider } from "./modal";
+import { WindowProvider } from "./window";
 
 const Providers = ({ children }) => {
   return (
-    <ProductProvider>
-      <ModalProvider>
-        {children}
-      </ModalProvider>
-    </ProductProvider>
+    <WindowProvider>
+      <ProductProvider>
+        <ModalProvider>{children}</ModalProvider>
+      </ProductProvider>
+    </WindowProvider>
   );
 };
 

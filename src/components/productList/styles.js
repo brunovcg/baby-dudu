@@ -1,20 +1,25 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import { configs } from "../../configs";
 
 const Styled = styled.main`
-background: var(--light-grey);
-width: 100%;
-min-height: 400px;
-display: flex;
-
-flex-wrap: wrap;
-gap: 30px;
-padding: 30px;
-
-@media (max-width: ${`${configs.mobileBreakpoint}px`}) {
+  background: var(--green);
+  width: 100%;
+  min-height: 400px;
+  display: flex;
   justify-content: center;
+  padding: 30px;
+
+  .product-list-container {
+    display: flex;
+    width: 100%;
+    max-width: 1570px;
+    gap: 30px;
+    flex-wrap: wrap;
   }
 
-`
+  @media (max-width: ${`${configs.mobileBreakpoint}px`}) {
+    justify-content: center;
+  }
+`;
 
-export default Styled
+export default Styled;

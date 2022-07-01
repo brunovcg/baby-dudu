@@ -1,3 +1,3 @@
 export const configs = {
-  mobileBreakpoint: 900
+  mobileBreakpoint: 1200
 }

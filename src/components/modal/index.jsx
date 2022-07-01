@@ -2,10 +2,6 @@ import ReactDOM from "react-dom";
 import { Modal } from "react-bootstrap";
 import {useContext} from "react"
 import Button from "../button";
-import {
-  FaArrowRight,
-
-} from "react-icons/fa";
 import { ModalContext } from "../../providers/modal";
 
 const ModalCustom = () => {
@@ -24,25 +20,23 @@ const ModalCustom = () => {
       </Modal.Header>
       <Modal.Body>{modalContent}</Modal.Body>
       <Modal.Footer>
+        <div style={{width: '100%', display: 'flex', justifyContent: 'end', gap: "30px"}}>
         {modalButtons.map((item, index) => (
           <Button
             key={index}
             onClick={item.onClick}
-            circle
-            width="40px"
-            height="40px"
+            size={item.width}
             backgroundColor={item.backgroundColor}
           >{item.text}</Button>
         ))}
         {closeButton && <Button
-          circle
-          backgroundColor="var(--grey)"
-          width="40px"
-          height="40px"
+          backgroundColor="var(--red)"
+          size="medium"
           onClick={() => setShow(false)}
         >
-          <FaArrowRight/>
+          Voltar
         </Button>}
+        </div>
       </Modal.Footer>
     </Modal>,
     document.getElementById("modal")

@@ -17,7 +17,8 @@ function Header() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: "30px"
+          paddingTop: "10px",
+          gap: "30px",
         }}
       >
         <h1
@@ -35,6 +36,7 @@ function Header() {
             color: "var(--green)",
             fontWeight: "bold",
             marginBottom: "0",
+            display: "flex",
           }}
         >
           <FaBabyCarriage />
@@ -51,7 +53,16 @@ function Header() {
           justifyContent: "center",
         }}
       >
-        <p style={{margin: "0"}}>Chá de bebê</p>
+        <p
+          style={{
+            fontSize: "30px",
+            margin: "0",
+            fontFamily: "'Chango', cursive",
+            color: "var(--purple)",
+          }}
+        >
+          Chá de bebê
+        </p>
       </div>
     </header>
   );
