@@ -1,12 +1,13 @@
-import Styled from "./styles"
+import Styled from "./styles";
 
-function Board () {
-
-
-
-  return <Styled>
-    
-  </Styled>  
+function Board() {
+  return (
+    <Styled>
+      <div className="transparent">
+        <p>Dudu está chegando</p>
+      </div>
+    </Styled>
+  );
 }
 
-export default Board
+export default Board;

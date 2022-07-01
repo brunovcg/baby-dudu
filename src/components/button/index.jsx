@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Button({ children, onClick, backgroundColor, size}) {
+function Button({ children, onClick, backgroundColor, size, disabled}) {
   const [hover, setHover] = useState(false);
 
   const hoverStyle = {
@@ -24,6 +24,7 @@ function Button({ children, onClick, backgroundColor, size}) {
 
   return (
     <button
+      disabled={disabled}
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
       style={{
@@ -32,11 +33,12 @@ function Button({ children, onClick, backgroundColor, size}) {
         width: buttonSize(),
         height: "50px",
         color: hover ? hoverStyle.color : "var(--white)",
-        backgroundColor: hover
+        backgroundColor: disabled ? "var(--disabled)" : hover
           ? hoverStyle.backgroundColor
           : backgroundColor ?? "var(--orange)",
         padding: "5px",
         fontSize: "13px",
+        cursor: disabled? "not-allowed": "pointer"
       }}
       onClick={onClick}
     >

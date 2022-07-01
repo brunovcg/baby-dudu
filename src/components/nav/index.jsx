@@ -2,47 +2,52 @@ import Input from "../input";
 import Styled from "./styles";
 import { useContext, useState, useEffect } from "react";
 import { ProductContext } from "../../providers/products";
-import { WindowContext } from "../../providers/window";
 import Ddl from "../ddl";
-import { configs } from "../../configs";
-import { isMobile } from "../../utils";
 
 function Nav() {
   const [inputValue, setInputValue] = useState("");
-  const { classifyProducts, filterProducts, filterCategory } =
+  const { classifyProducts, filterProducts, filterCategory, filterStatus } =
     useContext(ProductContext);
-  const { width } = useContext(WindowContext);
-  
-  const handleCategory = (word) => {
-    filterCategory(word);
+
+  const handleFilter = (word, type = "category") => {
+    if (type === "category") {
+      filterCategory(word);
+    } else if (type === "status") {
+      filterStatus(word);
+    }
     setInputValue("");
   };
 
   const navItems = [
     {
       id: 1,
-      name: "Banho",
-      onClick: () => handleCategory("Banho"),
+      name: "Todos",
+      onClick: () => handleFilter("Todos"),
     },
     {
       id: 2,
-      name: "Roupas",
-      onClick: () => handleCategory("Roupas"),
+      name: "Banho",
+      onClick: () => handleFilter("Banho"),
     },
     {
       id: 3,
-      name: "Passeio",
-      onClick: () => handleCategory("Passeio"),
+      name: "Roupas",
+      onClick: () => handleFilter("Roupas"),
     },
     {
       id: 4,
-      name: "Outros",
-      onClick: () => handleCategory("Outros"),
+      name: "Passeio",
+      onClick: () => handleFilter("Passeio"),
     },
     {
       id: 5,
-      name: "Todos",
-      onClick: () => handleCategory("Todos"),
+      name: "Outros",
+      onClick: () => handleFilter("Outros"),
+    },
+    {
+      id: 6,
+      name: "Não comprados",
+      onClick: () => handleFilter(false,"status"),
     },
   ];
 
@@ -71,20 +76,9 @@ function Nav() {
   return (
     <Styled>
       <div className="box-ddl">
-        {isMobile(width, configs.mobileBreakpoint) ? (
-          <nav>
-            <ul>
-              {navItems.map((item) => (
-                <li key={item.id}>{item.name}</li>
-              ))}
-            </ul>
-          </nav>
-        ) : (
-          <Ddl ddlItems={navItems} label="Filtrar" />
-        )}
-        <div className="dropdown">
-          <Ddl ddlItems={ddlItems} label="Classificar" />
-        </div>
+        <Ddl className="dropdown" ddlItems={navItems} label="Filtrar" />
+
+        <Ddl className="dropdown" ddlItems={ddlItems} label="Classificar" />
       </div>
 
       <div className="input">
@@ -93,7 +87,7 @@ function Nav() {
           onChange={(evt) => {
             setInputValue(evt.target.value);
           }}
-          placeholder="Filtrar por nome ou categoria"
+          placeholder="Filtrar por nome"
         />
       </div>
     </Styled>

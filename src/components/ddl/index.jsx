@@ -1,6 +1,6 @@
-import {Dropdown} from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 
-const Ddl = ({ddlItems, label}) => {
+const Ddl = ({ ddlItems, label }) => {
   return (
     <Dropdown>
       <Dropdown.Toggle
@@ -16,7 +16,11 @@ const Ddl = ({ddlItems, label}) => {
 
       <Dropdown.Menu>
         {ddlItems.map((item) => (
-          <Dropdown.Item key={item.id} onClick={item.onClick}>
+          <Dropdown.Item
+            key={item.id}
+            onClick={item.onClick}
+            style={{ fontFamily: "Chango, cursive", color: "var(--grey)" }}
+          >
             {item.name}
           </Dropdown.Item>
         ))}

@@ -21,23 +21,27 @@ export const ProductProvider = ({ children }) => {
     setProducts(database);
   }, []);
 
-  const filterProducts = useCallback((word, ) => {
-    const filter = [...products].filter((item) =>
-      item.name.toUpperCase().includes(word.toUpperCase())
-    );
-    setFiltered(filter);
-  },[products]);
-
-
+  const filterProducts = useCallback(
+    (word) => {
+      const filter = [...products].filter((item) =>
+        item.name.toUpperCase().includes(word.toUpperCase())
+      );
+      setFiltered(filter);
+    },
+    [products]
+  );
 
   const filterCategory = (category) => {
-
-
     setFiltered(products);
     if (category === "Todos") {
       return setFiltered(products);
     }
     const filter = [...products].filter((item) => item.category === category);
+    setFiltered(filter);
+  };
+
+  const filterStatus = (status = false) => {
+    let filter = [...filtered].filter((item) => item.status === status);
     setFiltered(filter);
   };
 
@@ -49,8 +53,20 @@ export const ProductProvider = ({ children }) => {
       return a[type].localeCompare(b[type]);
     });
 
-    setProducts(newOrder);
+    setFiltered(newOrder);
   };
+
+  const buyPresent = (id) => {
+
+    let newList = [...products] 
+
+    let index = newList.findIndex(item=> item.id  === id)
+
+    newList[index].status = true
+
+    setProducts(newList)
+
+  }
 
   useEffect(() => {
     setFiltered(products);
@@ -66,6 +82,8 @@ export const ProductProvider = ({ children }) => {
         classifyProducts,
         filterProducts,
         filterCategory,
+        filterStatus,
+        buyPresent
       }}
     >
       {children}

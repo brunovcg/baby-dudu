@@ -11,7 +11,9 @@ const GlobalStyle = createGlobalStyle`
     --dark-green: #7A9490;
     --purple: #B2A1DA;
     --blue: #79a2fc;
+    --light-blue: #dde6ff;
     --white: #fff;
+    --disabled: #d3d3d3;
        
     }
   * {
