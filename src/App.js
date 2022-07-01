@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/header'
+import Board from './components/board'
+import Nav from './components/nav'
+import ProductList from './components/productList';
+import {useEffect, useContext} from "react"
+import {ProductContext} from "./providers/products"
+import {ModalContext} from "./providers/modal"
+import Modal from "./components/modal"
 
 function App() {
+
+  const {getProducts} = useContext(ProductContext)
+  const {show} = useContext(ModalContext)
+
+  useEffect(()=>{
+    getProducts()
+
+  },[getProducts])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/>
+      <Board/>
+      <Nav/>
+      <ProductList/>
+      {show && <Modal/>}
+   
     </div>
   );
 }
