@@ -1,4 +1,4 @@
-import Dropdown from "react-bootstrap/dropdown";
+import {Dropdown} from "react-bootstrap";
 
 const Ddl = ({ddlItems, label}) => {
   return (
