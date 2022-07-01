@@ -15,7 +15,7 @@ const ModalCustom = () => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header >
+      <Modal.Header style={{width: "100%"}} >
         <Modal.Title>{modalTitle}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{modalContent}</Modal.Body>

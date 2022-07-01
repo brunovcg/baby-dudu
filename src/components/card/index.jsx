@@ -1,4 +1,4 @@
-import Styled from "./styles";
+import { Styled, ModalStyled } from "./styles";
 import { useContext } from "react";
 import { ModalContext } from "../../providers/modal";
 import { ProductContext } from "../../providers/products";
@@ -8,29 +8,13 @@ import Input from "../input";
 
 const ModalTemplate = () => {
   return (
-    <div
-      style={{
-        height: "400px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "start",
-        gap: "30px",
-      }}
-    >
-      <h3
-        style={{
-          color: "var(--orange)",
-          fontSize: "18px",
-          margin: "30px",
-          fontFamily: "Chango, cursive",
-        }}
-      >
-        Obrigado! Escreva seu nome para relacionarmos ao presente:
-      </h3>
-      <Input type="input" placeholder="seu nome" />
-      <Input type="textarea" placeholder="sua mensagem" />
-    </div>
+    <ModalStyled>
+      <h3>Obrigado! Escreva seu nome para relacionarmos ao presente:</h3>
+      <div className="input-card">
+        <Input type="input" placeholder="seu nome" />
+        <Input type="textarea" placeholder="sua mensagem" />
+      </div>
+    </ModalStyled>
   );
 };
 
@@ -40,15 +24,18 @@ function Card({ product }) {
 
   const handleClick = () => {
     openModal(
-      <span
+      <h1
         style={{
-          marginLeft: "30px",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          textAlign: "center",
           fontFamily: "Chango, cursive",
           color: "var(--grey)",
         }}
       >
         Marcar como comprado
-      </span>,
+      </h1>,
       <ModalTemplate />,
       [
         {

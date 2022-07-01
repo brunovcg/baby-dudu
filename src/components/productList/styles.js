@@ -15,6 +15,13 @@ const Styled = styled.main`
     max-width: 1570px;
     gap: 30px;
     flex-wrap: wrap;
+    
+
+    @media (max-width: ${`${configs.mobileBreakpoint}px`}) {
+    flex-direction: column;
+    align-items: center;
+  }
+  
   }
 
   @media (max-width: ${`${configs.mobileBreakpoint}px`}) {

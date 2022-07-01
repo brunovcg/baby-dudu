@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import {configs} from "../../configs"
 
-const Styled = styled.article`
+export const Styled = styled.article`
   background: var(--white);
   width: 290px;
   height: 400px;
@@ -21,7 +22,7 @@ const Styled = styled.article`
     img {
       max-height: 150px;
       padding: 15px;
-      opacity: ${props=>props.status ? "50%" : "100%"}
+      opacity: ${(props) => (props.status ? "50%" : "100%")};
     }
   }
 
@@ -41,21 +42,37 @@ const Styled = styled.article`
     .prod-name {
       font-family: "Chango", cursive;
       font-size: 20px;
-      color: ${(props) =>
-        props.status ? "var(--disabled)" : "var(--green)"};
+      color: ${(props) => (props.status ? "var(--disabled)" : "var(--green)")};
     }
 
     .prod-price {
-      color: ${(props) =>
-        props.status ? "var(--disabled)" : "var(--gray)"};
+      color: ${(props) => (props.status ? "var(--disabled)" : "var(--gray)")};
     }
 
     a {
-      color: ${(props) =>
-        props.status ? "var(--disabled)" : "var(--purple)"};
+      color: ${(props) => (props.status ? "var(--disabled)" : "var(--purple)")};
       font-weight: bold;
     }
   }
 `;
 
-export default Styled;
+export const ModalStyled = styled.div`
+
+height: 420px;
+  h3 {
+    color: var(--orange);
+    font-family: "Chango", cursive;
+    text-align: center;
+
+    @media (max-width: ${`${configs.mobileBreakpoint}px`}) {
+   font-size: 18px;
+  }
+  }
+
+  .input-card{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px
+  }
+`;
