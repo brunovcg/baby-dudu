@@ -12,9 +12,11 @@ const Styled = styled.main`
   .product-list-container {
     display: flex;
     width: 100%;
-    max-width: 1570px;
-    gap: 30px;
+    max-width: 1350px;
+
+    gap: 60px;
     flex-wrap: wrap;
+
     
 
     @media (max-width: ${`${configs.mobileBreakpoint}px`}) {

@@ -90,7 +90,7 @@ function Card({ product }) {
         <div className="prod-name">{product.name}</div>
 
         <div className="prod-price">
-          {product.category.name} |{toReal(product.price)}
+          {product.category.name} | {toReal(product.price)}
         </div>
         <a href={product.link} rel="noreferrer" target="_blank">
           Link de compra
