@@ -35,7 +35,7 @@ export const ProductProvider = ({ children }) => {
   const filterProducts = useCallback(
     (word) => {
       const filter = [...products].filter((item) =>
-        item.name.toUpperCase().includes(word.toUpperCase())
+        item.name?.toUpperCase().includes(word?.toUpperCase())
       );
       setFiltered(filter);
     },
