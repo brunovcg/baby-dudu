@@ -2,7 +2,7 @@ import axios from "axios";
 
 const settings = {
   env: {
-    prod: "http://localhost:8000/api/",
+    prod: "https://dudu-baby.herokuapp.com/",
     dev: "http://localhost:8000/api/",
   },
 };
