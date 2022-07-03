@@ -1,6 +1,11 @@
 import { FaBabyCarriage } from "react-icons/fa";
+import { useContext } from "react";
+import { WindowContext } from "../../providers/window";
 
 function Header() {
+
+  const { isMobile } = useContext(WindowContext);
+
   return (
     <header
       style={{
@@ -55,13 +60,14 @@ function Header() {
       >
         <p
           style={{
-            fontSize: "30px",
+            fontSize: isMobile() ? "14px" :"30px",
             margin: "0",
             fontFamily: "'Chango', cursive",
-            color: "var(--purple)",
+            color: "var(--yellow)",
+            padding: "0 20px"
           }}
         >
-          Chá de bebê
+          Lista para presentear Eduardinho...
         </p>
       </div>
     </header>

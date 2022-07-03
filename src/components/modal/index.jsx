@@ -5,7 +5,7 @@ import Button from "../button";
 import { ModalContext } from "../../providers/modal";
 
 const ModalCustom = () => {
-  const { show, setShow, modalTitle, modalContent, modalButtons, closeButton } = useContext(ModalContext);
+  const { show, setShow, modalTitle, modalContent, modalButtons=[], closeButton } = useContext(ModalContext);
 
   return ReactDOM.createPortal(
     <Modal

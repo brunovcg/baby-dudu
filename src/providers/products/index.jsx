@@ -1,12 +1,12 @@
 import { createContext, useState, useCallback, useEffect } from "react";
-import { database } from "../../db";
-//import {api} from "../../services/api"
+import { babyDuduServices as bdServices } from "../../services/api";
 
 export const ProductContext = createContext([]);
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [filtered, setFiltered] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const handleProduct = (selectedId, person) => {
     let items = [...products];
@@ -18,8 +18,19 @@ export const ProductProvider = ({ children }) => {
   };
 
   const getProducts = useCallback(() => {
-    setProducts(database);
+    bdServices()
+      .products.getAll()
+      .then((res) => {
+        setProducts(res.data);
+      });
   }, []);
+
+  const getCategories = useCallback(() => {
+    bdServices().categories.getAll().then((res) => {
+      setCategories(res.data);
+    });
+  }, []);
+
 
   const filterProducts = useCallback(
     (word) => {
@@ -56,17 +67,18 @@ export const ProductProvider = ({ children }) => {
     setFiltered(newOrder);
   };
 
-  const buyPresent = (id) => {
+  const buyPresent = (id, payload) => {
+    let newList = [...products];
 
-    let newList = [...products] 
+    let index = newList.findIndex((item) => item.id === id);
+    newList[index].status = true;
 
-    let index = newList.findIndex(item=> item.id  === id)
+    bdServices().products.update(id, payload).then(res=>{
+      setProducts(newList);
+    }).catch(err=> alert("algo deu errado"))
 
-    newList[index].status = true
-
-    setProducts(newList)
-
-  }
+    
+  };
 
   useEffect(() => {
     setFiltered(products);
@@ -83,7 +95,9 @@ export const ProductProvider = ({ children }) => {
         filterProducts,
         filterCategory,
         filterStatus,
-        buyPresent
+        buyPresent,
+        getCategories,
+        categories,
       }}
     >
       {children}

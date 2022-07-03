@@ -4,7 +4,7 @@ function Board() {
   return (
     <Styled>
       <div className="transparent">
-        <p>Dudu está chegando</p>
+        <p></p>
       </div>
     </Styled>
   );

@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
     --blue: #79a2fc;
     --light-blue: #dde6ff;
     --white: #fff;
+    --yellow: #CB9E83;
     --disabled: #d3d3d3;
        
     }

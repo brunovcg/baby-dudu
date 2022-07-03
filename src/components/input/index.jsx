@@ -6,6 +6,8 @@ function Input({ error, placeholder, label, onChange, value, type = "input" }) {
         height: "fit-content",
         display: "flex",
         justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
       }}
     >
       <label htmlFor={`input-${label}`}>{label}</label>
@@ -38,7 +40,18 @@ function Input({ error, placeholder, label, onChange, value, type = "input" }) {
           id={`input-${label}`}
         />
       )}
-      <div>{error || ""}</div>
+      {error && <div
+        style={{
+          color: "var(--red)",
+          paddingLeft: "5px",
+          fontSize: "14px",
+          fontWeight: "bold",
+          height: "16px",
+          width: "90%",
+        }}
+      >
+        {error || ""}
+      </div>}
     </div>
   );
 }

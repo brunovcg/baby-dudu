@@ -1,4 +1,4 @@
-import { createContext, useState} from "react";
+import { createContext, useState, useCallback} from "react";
 
 export const ModalContext = createContext([]);
 
@@ -9,14 +9,13 @@ export const ModalProvider = ({ children }) => {
   const [modalButtons, setModalButtons] = useState([]);
   const [closeButton, setCloseButton] = useState(true)
 
-
-  const modalReset = () => {
+  const modalReset = useCallback(() => {
     setShow(false)
     setModalTitle("");
     setModalContent("");
     setModalButtons([]);
     setCloseButton(true)
-  };
+  },[]);
 
   const openModal = (title, content, buttons = [], closeButton=true) => {
     setShow(true)
@@ -38,7 +37,9 @@ export const ModalProvider = ({ children }) => {
         modalContent,
         modalButtons,
         openModal,
-        closeButton
+        closeButton,
+        setModalButtons,
+        setModalContent
       }}
     >
       {children}

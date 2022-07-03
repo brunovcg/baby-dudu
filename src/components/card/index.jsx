@@ -1,54 +1,85 @@
-import { Styled, ModalStyled } from "./styles";
-import { useContext } from "react";
+import { Styled } from "./styles";
+import { useContext, useEffect, useCallback } from "react";
 import { ModalContext } from "../../providers/modal";
 import { ProductContext } from "../../providers/products";
+import { CardContext } from "../../providers/card";
 import { toReal } from "../../utils";
 import Button from "../button";
-import Input from "../input";
-
-const ModalTemplate = () => {
-  return (
-    <ModalStyled>
-      <h3>Obrigado! Escreva seu nome para relacionarmos ao presente:</h3>
-      <div className="input-card">
-        <Input type="input" placeholder="seu nome" />
-        <Input type="textarea" placeholder="sua mensagem" />
-      </div>
-    </ModalStyled>
-  );
-};
+import Title from "./template/title";
+import Content from "./template/content";
 
 function Card({ product }) {
-  const { openModal, modalReset } = useContext(ModalContext);
+  const { openModal, modalReset, setModalButtons } = useContext(ModalContext);
   const { buyPresent } = useContext(ProductContext);
+  const { message, setMessage, person, setPerson } = useContext(CardContext);
+
+  const modalCheck = useCallback(() => {
+    let error = false;
+    if (!message.data) {
+      setMessage({
+        data: "",
+        error: "Seria legal por seu nome",
+      });
+      error = true;
+    }
+    if (!person.data) {
+      setPerson({
+        data: "",
+        error: "Seria legal por seu nome",
+      });
+      error = true;
+    }
+    return error;
+  }, [message.data, person.data, setMessage, setPerson]);
+
+  const confirmClick = useCallback(() => {
+    const payload = {
+      status: true,
+      message: message.data,
+      person: person.data,
+    };
+    let error = modalCheck();
+
+    if (error) {
+      return;
+    }
+
+    buyPresent(product.id, payload);
+
+    modalReset();
+  }, [
+    buyPresent,
+    message.data,
+    modalCheck,
+    modalReset,
+    person.data,
+    product.id,
+  ]);
 
   const handleClick = () => {
     openModal(
-      <h1
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          textAlign: "center",
-          fontFamily: "Chango, cursive",
-          color: "var(--grey)",
-        }}
-      >
-        Marcar como comprado
-      </h1>,
-      <ModalTemplate />,
+      <Title />,
+
+      <Content />,
       [
         {
           text: "Confirmar",
-          onClick: () => {
-            buyPresent(product.id);
-            modalReset();
-          },
+          onClick: () => confirmClick(),
           backgroundColor: "var(--green)",
         },
       ]
     );
   };
+
+  useEffect(() => {
+    setModalButtons([
+      {
+        text: "Confirmar",
+        onClick: () => confirmClick(),
+        backgroundColor: "var(--green)",
+      },
+    ]);
+  }, [confirmClick, message, modalCheck, person, setModalButtons]);
 
   return (
     <Styled status={product.status}>
@@ -59,7 +90,7 @@ function Card({ product }) {
         <div className="prod-name">{product.name}</div>
 
         <div className="prod-price">
-          {product.category} | {toReal(product.price)}{" "}
+          {product.category.name} |{toReal(product.price)}
         </div>
         <a href={product.link} rel="noreferrer" target="_blank">
           Link de compra

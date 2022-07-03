@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { configs } from "../../configs";
 
 export const WindowContext = createContext([]);
 
@@ -30,8 +31,12 @@ export const WindowProvider = ({ children }) => {
 
   const { width, height } = useWindowDimensions();
 
+  const isMobile = () => {
+    return width < configs.mobileBreakpoint;
+  };
+
   return (
-    <WindowContext.Provider value={{ width, height }}>
+    <WindowContext.Provider value={{ width, height, isMobile }}>
       {children}
     </WindowContext.Provider>
   );

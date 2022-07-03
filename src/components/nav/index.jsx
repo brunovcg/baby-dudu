@@ -1,55 +1,52 @@
 import Input from "../input";
 import Styled from "./styles";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useCallback } from "react";
 import { ProductContext } from "../../providers/products";
 import Ddl from "../ddl";
 
 function Nav() {
   const [inputValue, setInputValue] = useState("");
-  const { classifyProducts, filterProducts, filterCategory, filterStatus } =
-    useContext(ProductContext);
+  const {
+    classifyProducts,
+    filterProducts,
+    filterCategory,
+    filterStatus,
+    categories,
+  } = useContext(ProductContext);
 
-  const handleFilter = (word, type = "category") => {
+  const [navItems, setNavItems] = useState();
+
+  const handleFilter = useCallback( (word, type = "category") => {
     if (type === "category") {
       filterCategory(word);
     } else if (type === "status") {
       filterStatus(word);
     }
     setInputValue("");
-  };
+  },[filterCategory, filterStatus]);
 
-  const navItems = [
-    {
-      id: 1,
-      name: "Todos",
-      onClick: () => handleFilter("Todos"),
-    },
-    {
-      id: 2,
-      name: "Banho",
-      onClick: () => handleFilter("Banho"),
-    },
-    {
-      id: 3,
-      name: "Roupas",
-      onClick: () => handleFilter("Roupas"),
-    },
-    {
-      id: 4,
-      name: "Passeio",
-      onClick: () => handleFilter("Passeio"),
-    },
-    {
-      id: 5,
-      name: "Outros",
-      onClick: () => handleFilter("Outros"),
-    },
-    {
-      id: 6,
-      name: "Não comprados",
-      onClick: () => handleFilter(false,"status"),
-    },
-  ];
+  const getNavItems = useCallback(() => {
+    let base = [
+      {
+        id: "nav-item-todos",
+        name: "Todos",
+        onClick: () => handleFilter("Todos"),
+      },
+      {
+        id: "nav-nao-comprado",
+        name: "Não comprados",
+        onClick: () => handleFilter(false, "status"),
+      },
+    ];
+
+    let newCategories = [...categories].map((item) => ({
+      id: item.id,
+      name: item.name,
+      onClick: () => handleFilter(`${item.name}`),
+    }));
+
+    return [...base, ...newCategories];
+  }, [categories, handleFilter]);
 
   const ddlItems = [
     {
@@ -73,10 +70,14 @@ function Nav() {
     filterProducts(inputValue);
   }, [filterProducts, inputValue]);
 
+  useEffect(() => {
+    setNavItems(getNavItems);
+  }, [categories, getNavItems]);
+
   return (
     <Styled>
       <div className="box-ddl">
-        <Ddl className="dropdown" ddlItems={navItems} label="Filtrar" />
+        <Ddl className="dropdown" ddlItems={navItems || []} label="Filtrar" />
 
         <Ddl className="dropdown" ddlItems={ddlItems} label="Classificar" />
       </div>
