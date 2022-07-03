@@ -47,7 +47,7 @@ export const ProductProvider = ({ children }) => {
     if (category === "Todos") {
       return setFiltered(products);
     }
-    const filter = [...products].filter((item) => item.category === category);
+    const filter = [...products].filter((item) => item.category.name === category);
     setFiltered(filter);
   };
 

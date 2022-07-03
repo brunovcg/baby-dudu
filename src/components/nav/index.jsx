@@ -33,14 +33,14 @@ function Nav() {
         onClick: () => handleFilter("Todos"),
       },
       {
-        id: "nav-nao-comprado",
+        id: "nav-item-nao-comprado",
         name: "Não comprados",
         onClick: () => handleFilter(false, "status"),
       },
     ];
 
     let newCategories = [...categories].map((item) => ({
-      id: item.id,
+      id: `nav-item-${item.id}`,
       name: item.name,
       onClick: () => handleFilter(`${item.name}`),
     }));
