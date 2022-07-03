@@ -7,6 +7,7 @@ import { ProductContext } from "./providers/products";
 import { ModalContext } from "./providers/modal";
 import Modal from "./components/modal";
 import Address from "./components/address"
+import Footer from "./components/footer"
 
 function App() {
   const { getProducts, categories, getCategories } = useContext(ProductContext);
@@ -27,6 +28,7 @@ function App() {
       <Address/>
       <Nav />
       <ProductList />
+      <Footer/>
       {show && <Modal />}
     </div>
   );

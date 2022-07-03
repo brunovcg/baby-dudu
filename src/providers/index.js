@@ -2,15 +2,18 @@ import { ProductProvider } from "./products";
 import { ModalProvider } from "./modal";
 import { WindowProvider } from "./window";
 import { CardProvider } from "./card";
+import { AuthProvider } from "./login";
 
 const Providers = ({ children }) => {
   return (
     <WindowProvider>
-      <ProductProvider>
-        <CardProvider>
-          <ModalProvider>{children}</ModalProvider>
-        </CardProvider>
-      </ProductProvider>
+      <ModalProvider>
+        <AuthProvider>
+          <ProductProvider>
+            <CardProvider>{children}</CardProvider>
+          </ProductProvider>
+        </AuthProvider>
+      </ModalProvider>
     </WindowProvider>
   );
 };

@@ -1,4 +1,13 @@
-function Input({ error, placeholder, label, onChange, value, type = "input" }) {
+function Input({
+  error,
+  placeholder,
+  label,
+  fieldType = "input",
+  onChange,
+  value,
+  type = "text",
+  showError = false,
+}) {
   return (
     <div
       style={{
@@ -11,9 +20,10 @@ function Input({ error, placeholder, label, onChange, value, type = "input" }) {
       }}
     >
       <label htmlFor={`input-${label}`}>{label}</label>
-      {type === "input" ? (
+      {fieldType === "input" ? (
         <input
           value={value}
+          type={type}
           onChange={onChange}
           style={{
             width: "90%",
@@ -40,18 +50,20 @@ function Input({ error, placeholder, label, onChange, value, type = "input" }) {
           id={`input-${label}`}
         />
       )}
-      {error && <div
-        style={{
-          color: "var(--red)",
-          paddingLeft: "5px",
-          fontSize: "14px",
-          fontWeight: "bold",
-          height: "16px",
-          width: "90%",
-        }}
-      >
-        {error || ""}
-      </div>}
+      {showError && (
+        <div
+          style={{
+            color: "var(--red)",
+            paddingLeft: "5px",
+            fontSize: "14px",
+            fontWeight: "bold",
+            height: "16px",
+            width: "90%",
+          }}
+        >
+          {error || ""}
+        </div>
+      )}
     </div>
   );
 }

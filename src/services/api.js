@@ -22,19 +22,18 @@ const api = () => {
   return axios.create({ baseURL: getEnv() });
 };
 
+export const getUserStorage = () =>
+  JSON.parse(sessionStorage.getItem("@baby-dudu:user"));
+
 export const babyDuduServices = () => {
   return {
     user: {
-      login: (payload) =>
-        api()
-          .post("login/", payload)
-          .then((res) => {
-            sessionStorage.setItem(
-              "@baby-dudu:token",
-              JSON.stringify(res.data.token)
-            );
-          }),
-      logoff: () => sessionStorage.removeItem("@baby-dudu:token"),
+      login: (payload) => api().post("login/", payload),
+
+      logoff: () => {
+        sessionStorage.removeItem("@baby-dudu:user");
+        sessionStorage.removeItem("@baby-dudu:token");
+      },
       signup: (payload) => api().post("signup/", payload),
     },
     products: {
