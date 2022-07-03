@@ -95,9 +95,11 @@ function Card({ product }) {
         <a href={product.link} rel="noreferrer" target="_blank">
           Link de compra
         </a>
+        <div className="button-box"> 
         <Button size="large" onClick={handleClick} disabled={product.status}>
           {product.status ? "Comprado" : "Marcar como comprado"}
         </Button>
+        </div>
       </div>
     </Styled>
   );

@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import {configs} from "../../configs"
+import { configs } from "../../configs";
 
 export const Styled = styled.article`
   background: var(--white);
   width: 290px;
   height: 400px;
-
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -21,13 +20,14 @@ export const Styled = styled.article`
 
     img {
       max-height: 150px;
-      padding: 15px;
+      border-radius: 5px;
       opacity: ${(props) => (props.status ? "50%" : "100%")};
     }
   }
 
   .info-box {
     height: 250px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,6 +43,14 @@ export const Styled = styled.article`
       font-family: "Chango", cursive;
       font-size: 20px;
       color: ${(props) => (props.status ? "var(--disabled)" : "var(--green)")};
+      text-align: center;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 10px;
+      display: block;
+      
     }
 
     .prod-price {
@@ -52,28 +60,32 @@ export const Styled = styled.article`
     a {
       color: ${(props) => (props.status ? "var(--disabled)" : "var(--yellow)")};
       font-weight: bold;
-      pointer-events: ${props=> props.status ? "none" : "auto"}
+      pointer-events: ${(props) => (props.status ? "none" : "auto")};
+    }
+
+    .button-box {
+      display: "flex";
+      justify-content: "center";
     }
   }
 `;
 
 export const ModalStyled = styled.div`
-
-height: 420px;
+  height: 420px;
   h3 {
     color: var(--orange);
     font-family: "Chango", cursive;
     text-align: center;
 
     @media (max-width: ${`${configs.mobileBreakpoint}px`}) {
-   font-size: 18px;
-  }
+      font-size: 18px;
+    }
   }
 
-  .input-card{
+  .input-card {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    gap: 15px
+    gap: 15px;
   }
 `;
