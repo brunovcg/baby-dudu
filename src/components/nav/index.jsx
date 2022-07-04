@@ -57,7 +57,7 @@ function Nav() {
     {
       id: 2,
       name: "Por categoria",
-      onClick: () => classifyProducts("category"),
+      onClick: () => classifyProducts("category","name"),
     },
     {
       id: 3,

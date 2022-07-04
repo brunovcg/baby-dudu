@@ -7,18 +7,17 @@ import { ModalContext } from "../../providers/modal";
 const ModalCustom = () => {
   const {
     show,
-    setShow,
+    modalReset,
     modalTitle,
     modalContent,
     modalButtons = [],
     closeButton,
-    injectButtons,
   } = useContext(ModalContext);
 
   return ReactDOM.createPortal(
     <Modal
       show={show}
-      onHide={() => setShow(false)}
+      onHide={() => modalReset()}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -36,7 +35,7 @@ const ModalCustom = () => {
             gap: "30px",
           }}
         >
-          {injectButtons
+          {!Array.isArray(modalButtons)
             ? modalButtons
             : modalButtons?.map((item, index) => (
                 <Button
@@ -52,7 +51,7 @@ const ModalCustom = () => {
             <Button
               backgroundColor="var(--red)"
               size="medium"
-              onClick={() => setShow(false)}
+              onClick={() => modalReset()}
             >
               Voltar
             </Button>

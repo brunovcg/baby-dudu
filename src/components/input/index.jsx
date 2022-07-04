@@ -19,7 +19,7 @@ function Input({
         flexDirection: "column",
       }}
     >
-      <label htmlFor={`input-${label}`}>{label}</label>
+      <label style={{width: "90%", color: "var(--green)"}} htmlFor={`input-${label}`}>{label}</label>
       {fieldType === "input" ? (
         <input
           value={value}

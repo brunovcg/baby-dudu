@@ -8,7 +8,6 @@ export const ModalProvider = ({ children }) => {
   const [modalContent, setModalContent] = useState("");
   const [modalButtons, setModalButtons] = useState([]);
   const [closeButton, setCloseButton] = useState(true);
-  const [injectButtons, setInjectButtons] = useState(false);
 
   const modalReset = useCallback(() => {
     setShow(false);
@@ -16,23 +15,13 @@ export const ModalProvider = ({ children }) => {
     setModalContent("");
     setModalButtons([]);
     setCloseButton(true);
-    setInjectButtons(false);
   }, []);
 
-  const openModal = (
-    title,
-    content,
-    buttons,
-    injectButtons = false,
-    closeButton = true
-  ) => {
+  const openModal = (title, content, buttons, closeButton = true) => {
     setShow(true);
     setModalTitle(title);
     setModalContent(content);
     setModalButtons(buttons);
-    if (injectButtons) {
-      setInjectButtons(true);
-    }
     if (!closeButton) {
       setCloseButton(false);
     }
@@ -51,7 +40,6 @@ export const ModalProvider = ({ children }) => {
         closeButton,
         setModalButtons,
         setModalContent,
-        injectButtons,
       }}
     >
       {children}

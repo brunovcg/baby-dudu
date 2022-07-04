@@ -29,7 +29,6 @@ export const babyDuduServices = () => {
   return {
     user: {
       login: (payload) => api().post("login/", payload),
-
       logoff: () => {
         sessionStorage.removeItem("@baby-dudu:user");
         sessionStorage.removeItem("@baby-dudu:token");

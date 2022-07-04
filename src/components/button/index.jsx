@@ -1,6 +1,13 @@
 import { useState } from "react";
 
-function Button({ children, onClick, backgroundColor, size, disabled}) {
+function Button({
+  children,
+  onClick,
+  backgroundColor,
+  size,
+  disabled,
+  otherStyles = {},
+}) {
   const [hover, setHover] = useState(false);
 
   const hoverStyle = {
@@ -33,12 +40,15 @@ function Button({ children, onClick, backgroundColor, size, disabled}) {
         width: buttonSize(),
         height: "50px",
         color: hover ? hoverStyle.color : "var(--white)",
-        backgroundColor: disabled ? "var(--disabled)" : hover
+        backgroundColor: disabled
+          ? "var(--disabled)"
+          : hover
           ? hoverStyle.backgroundColor
           : backgroundColor ?? "var(--orange)",
         padding: "5px",
         fontSize: "13px",
-        cursor: disabled? "not-allowed": "pointer"
+        cursor: disabled ? "not-allowed" : "pointer",
+        ...otherStyles,
       }}
       onClick={onClick}
     >

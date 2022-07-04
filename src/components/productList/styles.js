@@ -8,6 +8,12 @@ const Styled = styled.main`
   display: flex;
   justify-content: center;
   padding: 30px;
+  flex-direction: column;
+  align-items: center;
+
+  .add-button {
+    margin: 20px 0 30px 0; 
+  }
 
   .product-list-container {
     display: flex;

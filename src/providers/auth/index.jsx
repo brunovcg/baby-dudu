@@ -9,7 +9,7 @@ import { ModalContext } from "../modal";
 export const AuthContext = createContext([]);
 
 export const AuthProvider = ({ children }) => {
-  const { modalReset } = useContext(ModalContext);
+  const { modalReset, show } = useContext(ModalContext);
   const [username, setUsername] = useState({ data: "", error: "" });
   const [password, setPassword] = useState({ data: "", error: "" });
   const [user, setUser] = useState({});
@@ -26,16 +26,27 @@ export const AuthProvider = ({ children }) => {
         toast.success("Bem vindo(a)!");
         setUser(res.data);
         modalReset();
+        window.scrollTo(0, 0);
       })
       .catch((err) => {
-        console.log(err);
         toast.error("Erro no usuário ou na senha");
       });
+  };
+
+  const logoff = () => {
+    bdServices().user.logoff();
+    setUser({});
+    toast.success("Bye-bye!");
   };
 
   useEffect(() => {
     setUser(getUserStorage());
   }, []);
+
+  useEffect(() => {
+    setUsername({ data: "", error: "" });
+    setPassword({ data: "", error: "" });
+  }, [show]);
 
   return (
     <AuthContext.Provider
@@ -47,6 +58,7 @@ export const AuthProvider = ({ children }) => {
         user,
         setUser,
         login,
+        logoff,
       }}
     >
       {children}

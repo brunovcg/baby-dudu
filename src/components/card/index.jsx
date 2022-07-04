@@ -1,88 +1,36 @@
 import { Styled } from "./styles";
-import { useContext, useEffect, useCallback } from "react";
+import { useContext } from "react";
 import { ModalContext } from "../../providers/modal";
-import { ProductContext } from "../../providers/products";
-import { CardContext } from "../../providers/card";
+import { AuthContext } from "../../providers/auth";
 import { toReal } from "../../utils";
 import Button from "../button";
-import Title from "./template/title";
-import Content from "./template/content";
+import Title from "./template/modal-card-title";
+import Content from "./template/modal-card-content";
+import EditCard from "./template/edit-card";
+import EditModalContent from "./template/modal-edit-card-content";
+import ModalCardButtons from "./template/modal-card-buttons";
 
 function Card({ product }) {
-  const { openModal, modalReset, setModalButtons } = useContext(ModalContext);
-  const { buyPresent } = useContext(ProductContext);
-  const { message, setMessage, person, setPerson } = useContext(CardContext);
-
-  const modalCheck = useCallback(() => {
-    let error = false;
-    if (!message.data) {
-      setMessage({
-        data: "",
-        error: "Seria legal por seu nome",
-      });
-      error = true;
-    }
-    if (!person.data) {
-      setPerson({
-        data: "",
-        error: "Seria legal por seu nome",
-      });
-      error = true;
-    }
-    return error;
-  }, [message.data, person.data, setMessage, setPerson]);
-
-  const confirmClick = useCallback(() => {
-    const payload = {
-      status: true,
-      message: message.data,
-      person: person.data,
-    };
-    let error = modalCheck();
-
-    if (error) {
-      return;
-    }
-
-    buyPresent(product.id, payload);
-
-    modalReset();
-  }, [
-    buyPresent,
-    message.data,
-    modalCheck,
-    modalReset,
-    person.data,
-    product.id,
-  ]);
+  const { openModal } = useContext(ModalContext);
+  const { user } = useContext(AuthContext);
 
   const handleClick = () => {
-    openModal(
-      <Title />,
+    openModal(<Title />, <Content />, <ModalCardButtons productId={product.id} />);
+  };
 
-      <Content />,
-      [
-        {
-          text: "Confirmar",
-          onClick: () => confirmClick(),
-          backgroundColor: "var(--green)",
-        },
-      ]
+  const handleEdit = () => {
+    openModal(
+      <span style={{ fontFamily: "Chango, cursive", color: "var(--grey)" }}>
+        Alterar ou deletar?
+      </span>,
+      <EditModalContent product={product} />,
+      <></>
     );
   };
 
-  useEffect(() => {
-    setModalButtons([
-      {
-        text: "Confirmar",
-        onClick: () => confirmClick(),
-        backgroundColor: "var(--green)",
-      },
-    ]);
-  }, [confirmClick, message, modalCheck, person, setModalButtons]);
-
   return (
     <Styled status={product.status}>
+      {user?.token ? <EditCard onClick={handleEdit} /> : null}
       <figure>
         <img src={product.img} alt="foto" />
       </figure>
@@ -95,10 +43,10 @@ function Card({ product }) {
         <a href={product.link} rel="noreferrer" target="_blank">
           Link de compra
         </a>
-        <div className="button-box"> 
-        <Button size="large" onClick={handleClick} disabled={product.status}>
-          {product.status ? "Comprado" : "Marcar como comprado"}
-        </Button>
+        <div className="button-box">
+          <Button size="large" onClick={handleClick} disabled={product.status}>
+            {product.status ? "Comprado" : "Marcar como comprado"}
+          </Button>
         </div>
       </div>
     </Styled>

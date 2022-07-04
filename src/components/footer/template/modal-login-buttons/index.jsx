@@ -1,6 +1,6 @@
 import Button from "../../../button";
 import { useContext, useCallback } from "react";
-import { AuthContext } from "../../../../providers/login";
+import { AuthContext } from "../../../../providers/auth";
 
 function ModalLoginLButtons() {
   const { username, password, setPassword, setUsername, login } =
@@ -30,7 +30,6 @@ function ModalLoginLButtons() {
       username: username.data,
       password: password.data,
     };
-
     let error = modalCheck();
 
     if (error) {

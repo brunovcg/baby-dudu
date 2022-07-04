@@ -1,5 +1,6 @@
 import { createContext, useState, useCallback, useEffect } from "react";
 import { babyDuduServices as bdServices } from "../../services/api";
+import { toast } from "react-toastify";
 
 export const ProductContext = createContext([]);
 
@@ -26,11 +27,12 @@ export const ProductProvider = ({ children }) => {
   }, []);
 
   const getCategories = useCallback(() => {
-    bdServices().categories.getAll().then((res) => {
-      setCategories(res.data);
-    });
+    bdServices()
+      .categories.getAll()
+      .then((res) => {
+        setCategories(res.data);
+      });
   }, []);
-
 
   const filterProducts = useCallback(
     (word) => {
@@ -47,7 +49,9 @@ export const ProductProvider = ({ children }) => {
     if (category === "Todos") {
       return setFiltered(products);
     }
-    const filter = [...products].filter((item) => item.category.name === category);
+    const filter = [...products].filter(
+      (item) => item.category.name === category
+    );
     setFiltered(filter);
   };
 
@@ -56,8 +60,15 @@ export const ProductProvider = ({ children }) => {
     setFiltered(filter);
   };
 
-  const classifyProducts = (type) => {
+  const classifyProducts = (type, key) => {
     const newOrder = [...products].sort((a, b) => {
+      if (key) {
+        if (typeof key === "number") {
+          return a[type][key] - b[type][key];
+        }
+        return a[type][key].localeCompare(b[type][key]);
+      }
+
       if (typeof a[type] === "number") {
         return a[type] - b[type];
       }
@@ -73,11 +84,12 @@ export const ProductProvider = ({ children }) => {
     let index = newList.findIndex((item) => item.id === id);
     newList[index].status = true;
 
-    bdServices().products.update(id, payload).then(res=>{
-      setProducts(newList);
-    }).catch(err=> alert("algo deu errado"))
-
-    
+    bdServices()
+      .products.update(id, payload)
+      .then((res) => {
+        setProducts(newList);
+      })
+      .catch((err) => toast.error("algo deu errado"));
   };
 
   useEffect(() => {
@@ -89,6 +101,7 @@ export const ProductProvider = ({ children }) => {
       value={{
         filtered,
         products,
+        setProducts,
         handleProduct,
         getProducts,
         classifyProducts,

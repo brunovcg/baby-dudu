@@ -1,4 +1,4 @@
-import { ModalContent} from "../../styles";
+import { ModalContent} from "../../../../styles/modal-content.js";
 import Input from "../../../input";
 import { useContext } from "react";
 import { CardContext } from "../../../../providers/card";
@@ -9,7 +9,7 @@ function Content() {
   return (
     <ModalContent>
       <h3>Obrigado! Escreva seu nome para relacionarmos ao presente:</h3>
-      <div className="input-card">
+      <article >
         <Input
           onChange={(evt) => setPerson({ data: evt.target.value, error: "" })}
           error={person.error}
@@ -24,7 +24,7 @@ function Content() {
           placeholder="sua mensagem"
           showError
         />
-      </div>
+      </article>
     </ModalContent>
   );
 }

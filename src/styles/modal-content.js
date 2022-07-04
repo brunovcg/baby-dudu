@@ -4,7 +4,7 @@ import { configs } from "../configs";
 
 
 export const ModalContent = styled.div`
-height: 420px;
+height: 450px;
 h3 {
   color: var(--orange);
   font-family: "Chango", cursive;
@@ -15,10 +15,11 @@ h3 {
   }
 }
 
-.input-card {
+article {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  height: 200px;
+  gap: 10px;
 }
 `;
