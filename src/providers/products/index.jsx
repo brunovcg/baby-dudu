@@ -56,7 +56,7 @@ export const ProductProvider = ({ children }) => {
   };
 
   const filterStatus = (status = false) => {
-    let filter = [...filtered].filter((item) => item.status === status);
+    let filter = [...products].filter((item) => item.status === status);
     setFiltered(filter);
   };
 
