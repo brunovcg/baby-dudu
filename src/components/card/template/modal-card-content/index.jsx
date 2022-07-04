@@ -20,7 +20,7 @@ function Content() {
         <Input
           onChange={(evt) => setMessage({ data: evt.target.value, error: "" })}
           error={message.error}
-          fieldDype="textarea"
+          fieldType="textarea"
           placeholder="sua mensagem"
           showError
         />
