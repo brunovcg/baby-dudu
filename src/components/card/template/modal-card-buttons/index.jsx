@@ -14,7 +14,7 @@ function ModalCardButtons({ productId }) {
     if (!message.data) {
       setMessage({
         data: "",
-        error: "Seria legal por seu nome",
+        error: "Seria legal deixar uma mensagem para dudu",
       });
       error = true;
     }

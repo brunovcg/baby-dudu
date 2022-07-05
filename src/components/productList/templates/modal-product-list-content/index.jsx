@@ -45,7 +45,7 @@ function ModalProductListContent() {
           type="text"
         />
         <Input
-          label="price"
+          label="Preço"
           onChange={(evt) => setPrice({ data: evt.target.value, error: "" })}
           error={price.error}
           placeholder="Digite o preço"

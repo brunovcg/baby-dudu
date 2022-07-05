@@ -12,18 +12,26 @@ function Nav() {
     filterCategory,
     filterStatus,
     categories,
+    filtered,
+    products,
   } = useContext(ProductContext);
 
   const [navItems, setNavItems] = useState();
+  const [isFiltered, setIsFiltered] = useState(
+    filtered.length !== products.length
+  );
 
-  const handleFilter = useCallback( (word, type = "category") => {
-    if (type === "category") {
-      filterCategory(word);
-    } else if (type === "status") {
-      filterStatus(word);
-    }
-    setInputValue("");
-  },[filterCategory, filterStatus]);
+  const handleFilter = useCallback(
+    (word, type = "category") => {
+      if (type === "category") {
+        filterCategory(word);
+      } else if (type === "status") {
+        filterStatus(word);
+      }
+      setInputValue("");
+    },
+    [filterCategory, filterStatus]
+  );
 
   const getNavItems = useCallback(() => {
     let base = [
@@ -57,7 +65,7 @@ function Nav() {
     {
       id: 2,
       name: "Por categoria",
-      onClick: () => classifyProducts("category","name"),
+      onClick: () => classifyProducts("category", "name"),
     },
     {
       id: 3,
@@ -74,12 +82,26 @@ function Nav() {
     setNavItems(getNavItems);
   }, [categories, getNavItems]);
 
+  useEffect(() => {
+    setIsFiltered(filtered.length !== products.length);
+  }, [products, filtered]);
+
   return (
     <Styled>
       <div className="box-ddl">
-        <Ddl className="dropdown" ddlItems={navItems || []} label="Filtrar" />
+        <Ddl
+        backgroundColor={isFiltered ? "var(--red)" : "var(--green)"}
+          className="dropdown"
+          ddlItems={navItems || []}
+          label={isFiltered ? "Filtrado" : "Filtrar"}
+        />
 
-        <Ddl className="dropdown" ddlItems={ddlItems} label="Classificar" />
+        <Ddl
+          
+          className="dropdown"
+          ddlItems={ddlItems}
+          label="Classificar"
+        />
       </div>
 
       <div className="input">

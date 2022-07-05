@@ -7,11 +7,15 @@ export const getEnumArray = (array, searchKey, seachValue, resultKey) => {
 };
 
 export const capitalize = (string) => {
-  if (!string){return ""}
+  if (!string) {
+    return "";
+  }
   let newString = String(string).trim().split(" ");
 
-  return newString.map(
-    (item) =>
-      item[0].toUpperCase() + item.slice(1, item.length).toLowerCase()
-  ).join(" ");
+  return newString
+    .map(
+      (item) => item[0].toUpperCase() + item.slice(1, item.length).toLowerCase()
+    )
+    .join(" ");
 };
+

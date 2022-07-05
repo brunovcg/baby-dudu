@@ -1,11 +1,11 @@
 import { Dropdown } from "react-bootstrap";
 
-const Ddl = ({ ddlItems, label }) => {
+const Ddl = ({ backgroundColor = "var(--green)", ddlItems, label }) => {
   return (
     <Dropdown>
       <Dropdown.Toggle
         style={{
-          backgroundColor: "var(--green)",
+          backgroundColor: backgroundColor,
           fontFamily: "Chango, cursive",
         }}
         variant="success"
