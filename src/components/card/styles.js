@@ -59,7 +59,6 @@ export const Styled = styled.article`
     a {
       color: ${(props) => (props.status ? "var(--disabled)" : "var(--yellow)")};
       font-weight: bold;
-      pointer-events: ${(props) => (props.status ? "none" : "auto")};
     }
 
     .button-box {
